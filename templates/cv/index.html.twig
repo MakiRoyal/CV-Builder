@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} CV
+{% endblock %}
+
+{% block body %}
+
+	<div class=" ml-24 flex gap-72 ">
+
+		<div>		
+			<div>
+
+				<p class=" flex text-5xl mt-11 text-{{ cv.colorFirst }}-900 ">{{ cv.firstname }}</p>
+				<h1 class=" text-5xl text-{{ cv.colorFirst }}-900 ">{{ cv.lastname }}</h1>
+				<br>
+			</div>
+			<p class=" mt-4 text-{{ cv.colorFirst }}-900 text-lg">Email : </p>{{ cv.email }}
+			<br>
+			<p class=" mt-4 text-{{ cv.colorSecond }}-900 text-lg">Numéro de téléphone : </p>{{ cv.tel }}
+			<br>
+			<p class=" mt-4 text-{{ cv.colorFirst }}-900 text-lg ">Adresse : </p>{{ cv.postal }}
+			<br>
+			<p class=" mt-4 text-{{ cv.colorSecond }}-900 text-lg ">Lien Linkedin : </p>{{ cv.linkedin }}
+			<br>
+			<br>
+
+			<p class=" text-5xl text-{{ cv.colorFirst }}-900 ">Compétences</p>
+			{% for skill in cv.Skill %}
+				<div class=" mt-5 " >
+					{{ skill.name }}
+				</div>
+			{% endfor %}
+			<br>
+			<br>
+
+			<p class=" text-5xl text-{{ cv.colorFirst }}-900 ">Langues</p>
+			{% for language in cv.Language %}
+				<div class=" mt-5 " >
+					{{ language.name }}
+				</div>
+			{% endfor %}
+			<br>
+		</div>
+
+		<div class="mt-11">
+			<p class=" text-5xl text-{{ cv.colorFirst }}-900 ">Expériences professionnelles</p>
+			{% for PE in cv.ProfessionalExperiences %}
+				<div class=" mt-5 " >
+					<p class="text-{{ cv.colorSecond }}-900">{{ PE.name }}</p>
+					<br>
+					{{ PE.description }}
+					<br>
+					{{ PE.place }}
+					<br>
+					{{ PE.dateBegin|date("d/m/Y") }}
+					<br>
+					{{ PE.dateEnd|date("d/m/Y") }}
+					<br>
+					<br>
+				</div>
+		
+
+			{% endfor %}
+
+			<p class=" text-5xl text-{{ cv.colorFirst }}-900 ">Formations</p>
+			{% for diploma in cv.diploma %}
+				<div class=" mt-5 "  >
+					<p class="uppercase">{{ diploma.name }}</p>
+				</div>
+			{% endfor %}
+			<br>
+			<br>
+
+			<p class=" text-5xl text-{{ cv.colorFirst }}-900 ">Centres d'intérêts</p>
+			{% for hobby in cv.hobby %}
+				<div class=" mt-5 " >
+					{{ hobby.name }}
+				</div>
+			{% endfor %}
+
+			
+
+		</div>
+
+	</div>
+{% endblock %}
