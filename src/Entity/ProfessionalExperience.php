@@ -29,7 +29,7 @@ class ProfessionalExperience
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_end = null;
 
-    #[ORM\ManyToOne(inversedBy: 'professionalExperiences')]
+    #[ORM\ManyToOne(inversedBy: 'professionalExperiences', cascade: ['persist'])]
     private ?Cv $cv = null;
 
     public function getId(): ?int

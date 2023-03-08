@@ -7,7 +7,7 @@
 
 <h1> Créez votre CV </h1>
 
-<form method="post" action="{{ path('app_home') }}" class="bg-gray-300 rounded px-8 pt-6 pb-8 mb-4">
+<form method="post" class="bg-gray-300 rounded px-8 pt-6 pb-8 mb-4">
         <label for="firstname" class="block text-gray-700 font-medium mb-2">Prénom :</label>
         <input type="text" id="firstname" name="firstname" required class="border border-gray-400 p-2 w-full">
         <label for="lastname" class="block text-gray-700 font-medium mb-2">Nom :</label>
@@ -25,8 +25,8 @@
         <input type="text" id="name" name="name" required class="border border-gray-400 p-2 w-full">
         <input type="text" id="description" name="description" required class="border border-gray-400 p-2 w-full">
         <input type="text" id="place" name="place" required class="border border-gray-400 p-2 w-full">
-        <input type="date" id="dateStart" name="dateStart" required class="border border-gray-400 p-2 w-full">
-        <input type="date" id="dateEnd" name="dateEnd" required class="border border-gray-400 p-2 w-full">
+        <input type="date" id="dateStart" name="date_begin" required class="border border-gray-400 p-2 w-full">
+        <input type="date" id="dateEnd" name="date_end" required class="border border-gray-400 p-2 w-full">
         <label for="diploma" class="block text-gray-700 font-medium mb-2">Diplômes :</label>
             <select name="diploma" id="diploma" class="border border-gray-400 p-2 w-full">
                 {% for diploma in diplomas %}
@@ -52,9 +52,9 @@
                 {% endfor %}
             </select>
         <label for="color_first" class="block text-gray-700 font-medium mb-2">Couleur 1 :</label>
-        <input type="color" id="color_first" name="color_first" required class="border border-gray-400 p-2 w-full">
+        <input type="text" id="color_first" name="color_first" required class="border border-gray-400 p-2 w-full" placeholder="red / blue">
         <label for="color_second" class="block text-gray-700 font-medium mb-2">Couleur 2 :</label>
-        <input type="color" id="color_second" name="color_second" required class="border border-gray-400 p-2 w-full">
+        <input type="text" id="color_second" name="color_second" required class="border border-gray-400 p-2 w-full" placeholder="red / blue">
         <div class="flex items-center justify-between mt-4">
             <input type="submit" value="Se connecter" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         </div>

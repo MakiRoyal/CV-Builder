@@ -84,27 +84,32 @@ class CvController extends AbstractController
                 $cv->setPostal($postal);
                 $cv->setTel($tel);
                 $cv->setLinkedin($linkedin);
+                $cv->setColorFirst($color_first);
+                $cv->setColorSecond($color_second);
                 $cv->addDiploma($diplomaRepository->find($diploma));
                 $cv->addSkill($skillRepository->find($skill));
                 $cv->addHobby($hobbyRepository->find($hobby));
                 $cv->addLanguage($languageRepository->find($language));
-                $cv->setColorFirst($color_first);
-                $cv->setColorSecond($color_second);
 
                 $professionalExperience = new ProfessionalExperience();
                 $professionalExperience->setName($name);
                 $professionalExperience->setDescription($description);
                 $professionalExperience->setPlace($place);
-                $professionalExperience->setDateBegin($date_begin);
-                $professionalExperience->setDateEnd($date_end);
+                $professionalExperience->setDateBegin(new \DateTime($date_begin));
+                $professionalExperience->setDateEnd(new \DateTime($date_end));
+
+                $entityManager->persist($professionalExperience);
 
                 $cv->addProfessionalExperience($professionalExperience);
 
-                $userSession->setCv($cv);
-
-                $entityManager->persist($userSession);
                 $entityManager->persist($cv);
                 $entityManager->flush();
+                
+                $userSession->setCv($cv);
+                $entityManager->persist($userSession);
+
+                $entityManager->flush();
+
                 
                 return $this->redirectToRoute('app_cv');
 
@@ -123,20 +128,3 @@ class CvController extends AbstractController
         ]);
     }
 }
-
-
-// Première étape
-// firstname : "Mika"
-// lastname : "Aze"
-// email : "aze@aze"
-// phone : "0123456789"
-// address : "1 rue de la paix"
-// linkedin : "https://www"
-
-// Deuxième étapes
-// OneToMany : ProfessionnalExperiences
-
-// Troisième étapes
-// ManyToMany : Skill
-// ManyToMany : Language
-// ManyToMany : Hobby

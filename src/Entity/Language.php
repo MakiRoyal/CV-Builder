@@ -18,7 +18,7 @@ class Language
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Cv::class, mappedBy: 'language')]
+    #[ORM\ManyToMany(targetEntity: Cv::class, mappedBy: 'language', cascade: ['persist'])]
     private Collection $cvs;
 
     public function __construct()

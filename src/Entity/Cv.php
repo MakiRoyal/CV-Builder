@@ -33,19 +33,19 @@ class Cv
     #[ORM\Column(length: 255)]
     private ?string $linkedin = null;
 
-    #[ORM\OneToMany(mappedBy: 'cv', targetEntity: ProfessionalExperience::class)]
+    #[ORM\OneToMany(mappedBy: 'cv', targetEntity: ProfessionalExperience::class, cascade: ['persist'])]
     private Collection $professionalExperiences;
 
-    #[ORM\ManyToMany(targetEntity: Diploma::class, inversedBy: 'cvs')]
+    #[ORM\ManyToMany(targetEntity: Diploma::class, inversedBy: 'cvs', cascade: ['persist'])]
     private Collection $diploma;
 
-    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'cvs')]
+    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'cvs', cascade: ['persist'])]
     private Collection $skill;
 
-    #[ORM\ManyToMany(targetEntity: Language::class, inversedBy: 'cvs')]
+    #[ORM\ManyToMany(targetEntity: Language::class, inversedBy: 'cvs', cascade: ['persist'])]
     private Collection $language;
 
-    #[ORM\ManyToMany(targetEntity: Hobby::class, inversedBy: 'cvs')]
+    #[ORM\ManyToMany(targetEntity: Hobby::class, inversedBy: 'cvs', cascade: ['persist'])]
     private Collection $hobby;
 
     #[ORM\Column(length: 255)]

@@ -18,7 +18,7 @@ class Skill
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Cv::class, mappedBy: 'skill')]
+    #[ORM\ManyToMany(targetEntity: Cv::class, mappedBy: 'skill', cascade: ['persist'])]
     private Collection $cvs;
 
     public function __construct()
