@@ -14,6 +14,7 @@ use App\Entity\Hobby;
 use App\Entity\Language;
 use App\Entity\ProfessionalExperience;
 use App\Entity\Skill;
+use App\Entity\User;
 
 class CvController extends AbstractController
 {
@@ -42,6 +43,9 @@ class CvController extends AbstractController
     {
         $session = $request->getSession();
         $userSession = $session->get('user');
+
+        $userRepository = $doctrine->getRepository(User::class);
+        $user = $userRepository->find($userSession->getId());
 
         $entityManager = $doctrine->getManager();
         
@@ -105,8 +109,10 @@ class CvController extends AbstractController
                 $entityManager->persist($cv);
                 $entityManager->flush();
                 
+                $user->setCv($cv);
                 $userSession->setCv($cv);
-                $entityManager->persist($userSession);
+
+                $entityManager->persist($user);
 
                 $entityManager->flush();
 
@@ -116,7 +122,7 @@ class CvController extends AbstractController
             }
         }
 
-        
+
 
 
 
@@ -127,4 +133,24 @@ class CvController extends AbstractController
             'diplomas' => $diplomas,
         ]);
     }
+
+    #[Route('cv/contact', name: 'app_cv_contact')]
+    public function contact(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $session = $request->getSession();
+        $userSession = $session->get('user');
+
+        $cv = null;
+
+        if ($userSession) {
+            $cvRepository = $doctrine->getRepository(Cv::class);
+
+            $cv = $cvRepository->find($userSession->getCv()->getId());
+        }
+
+        return $this->render('cv/contact.html.twig', [
+            'cv' => $cv,
+        ]);
+    }
+    
 }
